@@ -1,5 +1,5 @@
 // routes/products.js
-const express = require("express");
+import express from "express";
 const router = express.Router();
 const { getProducts, createProduct } = require("../controllers/productController");
 
