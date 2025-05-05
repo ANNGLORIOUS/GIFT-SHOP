@@ -1,5 +1,5 @@
 // File: routes/categories.js
-const express = require("express");
+import express from "express";
 const router = express.Router();
 const { getCategories } = require("../controllers/categoryController");
 
