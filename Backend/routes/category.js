@@ -8,8 +8,8 @@ const {
   updateCategory, 
   deleteCategory 
 } = require('../controllers/categoryController');
-const { authenticate, isAdmin } = require('../middleware/auth');
-const { categoryValidation, validateResult } = require('../middleware/validators');
+const { authenticate, isAdmin } = require('../middleware/auths');
+const { categoryValidation, validateResult } = require('../middleware/Validators');
 
 // Get all categories (public)
 router.get('/', getCategories);

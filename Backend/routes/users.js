@@ -7,12 +7,12 @@ const {
   getProfile, 
   updateProfile 
 } = require('../controllers/userController');
-const { authenticate } = require('../middleware/auth');
+const { authenticate } = require('../middleware/auths');
 const { 
   registerValidation, 
   loginValidation,
   validateResult 
-} = require('../middleware/validators');
+} = require('../middleware/Validators');
 
 // Register a new user
 router.post('/register', registerValidation, validateResult, registerUser);

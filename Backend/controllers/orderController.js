@@ -3,7 +3,7 @@ const Order = require('../models/Order');
 const OrderItem = require('../models/OrderItem');
 const Product = require('../models/Product');
 const Cart = require('../models/Cart');
-const db = require('../config/database');
+const db = require('../config/db');
 
 // Get all orders for current user
 exports.getOrders = async (req, res) => {
