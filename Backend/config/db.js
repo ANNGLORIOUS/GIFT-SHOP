@@ -1,15 +1,17 @@
-// config/database.js
+// db.js
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const db = new Sequelize(
-  process.env.DB_NAME || 'soleil_jewelry',
-  process.env.DB_USER || 'root',
-  process.env.DB_PASSWORD || '',
+// Create Sequelize instance
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'mysql', // You can change this to 'postgres', 'sqlite', etc.
-    logging: false,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'mysql',
+    logging: console.log, // Set to false to disable logging
     pool: {
       max: 5,
       min: 0,
@@ -22,13 +24,15 @@ const db = new Sequelize(
 // Test the connection
 const testConnection = async () => {
   try {
-    await db.authenticate();
-    console.log('Database connection established successfully.');
+    await sequelize.authenticate();
+    console.log('Connection to database established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+    throw error;
   }
 };
 
-testConnection();
-
-module.exports = db;
+module.exports = {
+  sequelize,
+  testConnection
+};

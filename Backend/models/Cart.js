@@ -1,10 +1,10 @@
 // models/Cart.js
 const { DataTypes } = require("sequelize");
-const db = require("../config/db");
+const {sequelize} = require("../config/db");
 const User = require("./User");
 const Product = require("./Product");
 
-const Cart = db.define("Cart", {
+const Cart = sequelize.define("Cart", {
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,

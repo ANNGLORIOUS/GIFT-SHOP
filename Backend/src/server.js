@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const db = require('../config/db');
+const {sequelize} = require('../config/db');
 const { notFound, errorHandler } = require('../middleware/errorHandler');
 
 // Import routes
@@ -41,7 +41,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 // Sync database and start server
-db.sync()
+sequelize.sync()
   .then(() => {
     console.log('Database synced');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
