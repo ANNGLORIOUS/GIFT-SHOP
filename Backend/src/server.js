@@ -1,30 +1,51 @@
-// File: server.js
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import db from "../config/db.js";
-import productRoutes from "../routes/product.js";
-import categoryRoutes from "../routes/category.js";
-import userRoutes from "../routes/users.js";
-import orderRoutes from "../routes/orders.js";
+// server.js
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const db = require('./config/database');
+const { notFound, errorHandler } = require('./middleware/error');
 
+// Import routes
+const productRoutes = require('./routes/products');
+const categoryRoutes = require('./routes/categories');
+const userRoutes = require('./routes/users');
+const orderRoutes = require('./routes/orders');
+const cartRoutes = require('./routes/cart');
+
+// Load environment variables
 dotenv.config();
 
+// Initialize app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/products", productRoutes);
-app.use("/api/categories", categoryRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
+// Routes
+app.use('/api/products', productRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/cart', cartRoutes);
 
-// Ensure the DB is synced before starting the server
+// Base route
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to Soleil Jewelry API' });
+});
+
+// Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
+
+// Sync database and start server
 db.sync()
   .then(() => {
-    console.log("Database synced");
-    app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+    console.log('Database synced');
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch((err) => console.error("Sync Error:", err));
+  .catch((err) => console.error('Database connection error:', err));
+
+module.exports = app;
