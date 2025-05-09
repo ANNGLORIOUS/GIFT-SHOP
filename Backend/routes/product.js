@@ -8,8 +8,8 @@ const {
   updateProduct, 
   deleteProduct 
 } = require('../controllers/productController');
-const { authenticate, isAdmin } = require('../middleware/auth');
-const { productValidation, validateResult } = require('../middleware/validators');
+const { authenticate, isAdmin } = require('../middleware/auths');
+const { productValidation, validateResult } = require('../middleware/Validators');
 
 // Get all products (public)
 router.get('/', getProducts);

@@ -1,6 +1,6 @@
 // seeders/seed.js
 const bcrypt = require('bcryptjs');
-const db = require('../config/database');
+const {sequelize} = require('../config/db');
 const User = require('../models/User');
 const Category = require('../models/Category');
 const Product = require('../models/Product');

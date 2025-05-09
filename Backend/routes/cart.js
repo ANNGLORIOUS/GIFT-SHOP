@@ -8,7 +8,7 @@ const {
   removeFromCart, 
   clearCart 
 } = require('../controllers/cartController');
-const { authenticate } = require('../middleware/auth');
+const { authenticate } = require('../middleware/auths');
 
 // All cart routes require authentication
 router.use(authenticate);

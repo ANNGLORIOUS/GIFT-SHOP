@@ -8,8 +8,8 @@ const {
   updateOrderStatus, 
   getAllOrders 
 } = require('../controllers/orderController');
-const { authenticate, isAdmin } = require('../middleware/auth');
-const { orderValidation, validateResult } = require('../middleware/validators');
+const { authenticate, isAdmin } = require('../middleware/auths');
+const { orderValidation, validateResult } = require('../middleware/Validators');
 
 // All order routes require authentication
 router.use(authenticate);

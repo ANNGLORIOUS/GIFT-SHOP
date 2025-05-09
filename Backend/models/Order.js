@@ -1,9 +1,9 @@
 // models/Order.js
 const { DataTypes } = require("sequelize");
-const db = require("../config/database");
+const {sequelize} = require("../config/db");
 const User = require("./User");
 
-const Order = db.define("Order", {
+const Order = sequelize.define("Order", {
   total: { 
     type: DataTypes.FLOAT, 
     allowNull: false 

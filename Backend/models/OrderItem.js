@@ -1,10 +1,10 @@
 // models/OrderItem.js
 const { DataTypes } = require("sequelize");
-const db = require("../config/database");
+const {sequelize} = require("../config/db");
 const Order = require("./Order");
 const Product = require("./Product");
 
-const OrderItem = db.define("OrderItem", {
+const OrderItem = sequelize.define("OrderItem", {
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,

@@ -2,15 +2,15 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const db = require('./config/database');
-const { notFound, errorHandler } = require('./middleware/error');
+const {sequelize} = require('../config/db');
+const { notFound, errorHandler } = require('../middleware/errorHandler');
 
 // Import routes
-const productRoutes = require('./routes/products');
-const categoryRoutes = require('./routes/categories');
-const userRoutes = require('./routes/users');
-const orderRoutes = require('./routes/orders');
-const cartRoutes = require('./routes/cart');
+const productRoutes = require('../routes/product');
+const categoryRoutes = require('../routes/category');
+const userRoutes = require('../routes/users');
+const orderRoutes = require('../routes/orders');
+const cartRoutes = require('../routes/cart');
 
 // Load environment variables
 dotenv.config();
@@ -41,7 +41,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 // Sync database and start server
-db.sync()
+sequelize.sync()
   .then(() => {
     console.log('Database synced');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
