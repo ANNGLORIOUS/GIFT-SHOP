@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const {sequelize} = require('../config/db');
+const sequelize = require('../config/db');
 const { notFound, errorHandler } = require('../middleware/errorHandler');
 
 // Import routes
